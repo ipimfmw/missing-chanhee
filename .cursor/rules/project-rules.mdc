@@ -1,0 +1,228 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+### PRD ###
+포켓몬스터 스타일 게임 PRD (제품 요구사항 정의서)
+이 PRD는 포켓몬스터 게임과 유사한 비트맵 기반 지도에서 캐릭터가 움직이는 가상공간 게임의 개발 방향을 제시합니다. 특히 최적화된 렌더링 방식과 추억을 담은 가상공간 구현에 초점을 맞춥니다.
+1. 제품 개요
+1.1 목적
+포켓몬스터 같은 클래식 게임 스타일을 차용하여 사용자와 동료들의 추억을 간직할 수 있는 가상공간을 구현합니다.
+
+1.2 목표 사용자
+레트로 픽셀 아트 게임을 좋아하는 사용자
+친구들과의 추억을 게임 속에서 간직하고 싶은 사용자
+
+2. 핵심 기능 및 기술 요구사항
+2.1 맵 시스템
+전체 맵 크기: 200 x 300 타일(변동 가능 하나 기본값은 200 * 300)
+가시 영역: 50 x 40 타일 (화면에 표시되는 영역)
+렌더링 영역: 70 x 70 타일 (최적화를 위한 사전 렌더링 영역)
+
+2.2 렌더링 최적화 시스템
+캐릭터를 중심으로 한 70 x 70 타일 영역만 사전 렌더링하는 방식을 구현합니다. 이는 마치 카메라가 캐릭터를 따라다니며 주변 일정 영역만 보여주는 창문과 같습니다. 사용자가 보는 실제 화면(50 x 40)보다 더 넓은 영역(70 x 70)을 미리 렌더링해 두어 캐릭터가 이동할 때 화면 전환이 부드럽게 이루어집니다.
+
+2.3 캐릭터 시스템
+플레이어 캐릭터 커스터마이징 옵션(추후 제공)
+동료 캐릭터들의 외형 및 특성을 실제 친구들과 유사하게 구현(추후 제공)
+4방향 이동 애니메이션
+
+3. 추억 요소 구현
+3.1 동료 캐릭터 구현
+친구나 동료의 특징을 반영한 NPC 캐릭터를 구현합니다. 이들은:
+
+실제 동료들의 특징적인 외모 반영
+동료들의 말투나 행동 패턴을 반영한 대화 시스템
+실제 있었던 추억의 이벤트를 게임 내 이벤트로 재현
+
+3.2 추억의 장소
+현실 세계의 의미 있는 장소들을 게임 내 지역으로 재해석합니다:
+
+학교, 직장, 자주 방문했던 카페 등을 픽셀 아트로 재현
+각 장소마다 관련된 특별한 이벤트나 미니게임 구현
+
+4. 기술적 구현 방안
+4.1 타일 맵 시스템 설계
+비트맵 기반 타일 맵을 효율적으로 구성하여 200 x 300의 넓은 월드를 구현합니다. 타일은 지형, 오브젝트, 이벤트 레이어로 구분하여 관리합니다.
+
+4.2 렌더링 최적화 알고리즘
+캐릭터 중심 70 x 70 타일 영역만 메모리에 로드하고 렌더링하는 시스템을 구현합니다. 이는 다음과 같은 방식으로 작동합니다:
+플레이어 위치를 중심으로 가상의 70 x 70 그리드를 설정
+이 그리드 내의 타일만 메모리에 로드
+플레이어가 이동함에 따라 그리드도 함께 이동
+그리드 밖으로 나가는 타일은 메모리에서 해제하고 새로 들어오는 타일 로드
+이는 마치 쇼핑몰에서 에스컬레이터를 타고 올라갈 때, 시야에 들어오는 상점들이 바뀌는 것과 유사합니다. 사용자는 현재 보이는 부분만 신경 쓰면 되지만, 시스템은 사용자가 곧 보게 될 약간의 추가 영역도 미리 준비해둡니다.
+
+5. 사용자 경험
+5.1 조작 시스템
+키보드 방향키 또는 WASD를 통한 캐릭터 이동
+스페이스바나 Z키를 통한 상호작용
+간단한 메뉴 시스템으로 게임 설정 및 세이브/로드 기능
+
+5.2 UI/UX 디자인
+레트로 스타일의 픽셀 아트 UI
+간결하고 직관적인 메뉴 구성
+포켓몬스터와 유사한 대화창 및 알림 시스템
+
+6. 개발 로드맵
+6.1 1단계: 기술적 기반 구축
+타일맵 시스템 구현
+최적화된 렌더링 시스템 개발
+캐릭터 이동 및 상호작용 시스템 구현
+
+6.2 2단계: 콘텐츠 개발
+동료 캐릭터 디자인 및 구현
+추억의 장소 맵 디자인
+이벤트 및 대화 시스템 구현
+
+6.3 3단계: 테스트 및 완성
+성능 최적화 및 버그 수정
+사용자 피드백 반영
+최종 콘텐츠 추가 및 마무리
+
+7. 성공 기준
+게임이 원활하게 작동하며 렌더링 최적화가 효과적으로 이루어질 것
+추억의 요소들이 게임 내에서 의미 있게 재현될 것
+사용자가 게임을 통해 추억을 회상하고 즐거운 경험을 할 수 있을 것
+
+
+### 개발을 위한 가이드 ###
+1. 시스템 정의
+PROJECT_NAME: RetroMemoryWorld
+PROJECT_TYPE: 2D_Tile_Based_Game
+VISUAL_STYLE: Pokemon_Inspired_Bitmap
+CORE_MECHANICS: [Character_Movement, Memory_Interaction, Optimized_Rendering]
+
+2. 렌더링 시스템 스펙
+FULL_MAP_DIMENSIONS: [200, 300]  # 타일 단위
+VIEWPORT_DIMENSIONS: [50, 40]    # 사용자에게 보이는 영역
+RENDER_BUFFER_DIMENSIONS: [70, 70]  # 메모리에 유지되는 영역
+CAMERA_SYSTEM: Character_Centered
+RENDERING_APPROACH: Chunked_Bitmap_Loading
+
+3. 기술적 구현 명세
+3.1 렌더링 최적화 알고리즘
+(pseudo)
+function updateRenderBuffer(playerPosition):
+    # 플레이어 위치 중심으로 렌더 버퍼 좌표 계산
+    bufferTopLeft = {
+        x: max(0, playerPosition.x - RENDER_BUFFER_DIMENSIONS[0]/2),
+        y: max(0, playerPosition.y - RENDER_BUFFER_DIMENSIONS[1]/2)
+    }
+    
+    # 버퍼에 로드해야 할 타일 범위 계산
+    tilesNeeded = calculateTilesInRect(bufferTopLeft, RENDER_BUFFER_DIMENSIONS)
+    
+    # 현재 버퍼에 있는 타일 중 필요없는 타일 제거
+    for each tile in currentBuffer:
+        if tile not in tilesNeeded:
+            unloadTile(tile)
+    
+    # 새로 필요한 타일 로드
+    for each tile in tilesNeeded:
+        if tile not in currentBuffer:
+            loadTile(tile)
+            
+    # 뷰포트에 실제로 표시될 타일 계산 및 렌더링
+    viewportTopLeft = {
+        x: playerPosition.x - VIEWPORT_DIMENSIONS[0]/2,
+        y: playerPosition.y - VIEWPORT_DIMENSIONS[1]/2
+    }
+    renderViewport(viewportTopLeft, VIEWPORT_DIMENSIONS)
+3.2 데이터 구조
+MAP_STRUCTURE:
+  - LAYER_BACKGROUND: [terrain_id, walkable_boolean]
+  - LAYER_OBJECTS: [object_id, interaction_type]
+  - LAYER_EVENTS: [event_id, trigger_condition]
+
+MEMORY_ENTITIES:
+  - CHARACTER: {id, name, appearance, dialogue_patterns, behavior_script}
+  - LOCATION: {id, real_world_reference, memory_triggers, interaction_options}
+  - EVENT: {id, memory_reference, dialogue_sequence, visual_effects}
+
+4. 메모리 최적화 사양
+TILE_CACHING_STRATEGY: LRU_Cache_With_Prediction
+MEMORY_LIMIT_PER_RENDER_BUFFER: 10MB
+PREFETCH_DIRECTION_BIAS: Movement_Prediction_Based
+UNLOAD_THRESHOLD: 15_Tiles_From_Edge
+ASSET_COMPRESSION: Run_Length_Encoding
+TEXTURE_ATLAS: 512x512_Packed_Sprites
+
+5. 구현 지침 및 제약사항
+5.1 Vibe Coding 접근 방식 최적화
+CODE_GENERATION_FOCUS:
+  - MODULARITY: 각 시스템 컴포넌트를 독립적으로 구현
+  - CLEAR_INTERFACES: 시스템 간 데이터 흐름을 정확히 정의
+  - PERFORMANCE_CRITICAL_PATHS: 렌더링 루프와 메모리 관리에 우선순위 지정
+
+IMPLEMENTATION_CONSTRAINTS:
+  - OPTIMIZE_FOR: [Memory_Usage, Rendering_Performance]
+  - ACCEPTABLE_FRAME_RATE: 60FPS
+  - AVOID: [Global_State, Deep_Inheritance, Redundant_Calculations]
+  - PREFER: [Composition_Over_Inheritance, Immutable_Data_Where_Possible]
+
+5.2 추억 재현 기능 구현 방법
+MEMORY_IMPLEMENTATION:
+  - DIALOGUE_SYSTEM: Template_Based_With_Memory_Variables
+  - CHARACTER_BEHAVIOR: State_Machine_With_Memory_Triggers
+  - LOCATION_SIGNIFICANCE: Metadata_Driven_Visual_Effects
+  - INTERACTION_FEEDBACK: [Visual_Cues, Dialogue_Callbacks, Memory_Flashbacks]
+
+
+6. API 엔드포인트 및 함수 시그니처
+// 핵심 렌더링 함수
+function renderGameFrame(
+  playerPosition: Vector2D,
+  gameState: GameState
+): RenderCommandList;
+
+// 타일 관리 시스템
+interface TileManager {
+  loadTile(x: number, y: number, layer: number): Tile;
+  unloadTile(x: number, y: number, layer: number): void;
+  getTileAt(x: number, y: number, layer: number): Tile | null;
+  isTileWalkable(x: number, y: number): boolean;
+}
+
+// 메모리 인터랙션 시스템
+interface MemorySystem {
+  triggerMemoryAt(location: Vector2D): MemoryEvent[];
+  createCharacterFromMemory(template: MemoryTemplate): Character;
+  loadMemoryLocation(realWorldReference: string): GameLocation;
+}
+7. 테스트 사례 및 검증 기준
+TEST_SCENARIOS:
+  - EDGE_CASE_MAP_BOUNDARIES: 플레이어가 맵 경계에 접근할 때 렌더링 동작 확인
+  - PERFORMANCE_TEST: 1000개 메모리 엔티티 로드 시 프레임 속도 측정
+  - MEMORY_LEAK_TEST: 12시간 연속 실행 후 메모리 사용량 증가 < 5%
+  
+ACCEPTANCE_CRITERIA:
+  - RENDER_BUFFER_UPDATE_TIME: < 16ms
+  - MEMORY_USAGE_PEAK: < 100MB
+  - LOADING_STUTTER: 감지 불가능 (< 5ms)
+
+
+8. 구현 순서 및 의존성
+graph TD
+    A[타일맵 시스템 구현] --> B[렌더 버퍼 로직 구현]
+    B --> C[카메라 시스템 연결]
+    C --> D[캐릭터 움직임 구현]
+    D --> E[충돌 감지 시스템]
+    E --> F[메모리 엔티티 상호작용]
+    
+    G[에셋 로딩 시스템] --> B
+    H[메모리 템플릿 정의] --> F
+
+9. 자동 최적화 힌트
+OPTIMIZATION_OPPORTUNITIES:
+  - SPATIAL_HASHING: 충돌 감지 최적화를 위한 공간 해싱 구현
+  - DIRTY_RECTANGLE_RENDERING: 변경된 영역만 다시 그리기
+  - ASSET_STREAMING: 방향 기반 에셋 사전 로딩
+  - EVENT_BATCHING: 유사한 이벤트 처리 일괄 처리
+
+10. 개발자 참고사항
+이 PRD는 AI 에이전트(Claude 3.7 Sonnet)가 Vibe Coding 방식으로 구현하기 위해 최적화되었습니다. 
+주요 개발 초점은 메모리 효율적인 렌더링 시스템과 의미 있는 추억 표현 메커니즘입니다.
+구현 시 특히 타일 로딩/언로딩 로직과 메모리 관리에 주의를 기울이세요.
+
