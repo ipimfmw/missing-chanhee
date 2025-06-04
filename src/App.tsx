@@ -19,7 +19,7 @@ function App() {
   // 키보드 이동 처리
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      console.log('Key pressed:', e.key); // 디버깅용 로그
+      // console.log('Key pressed:', e.key); // 디버깅용 로그
       
       let dx = 0, dy = 0;
       if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') dy = -1;
@@ -30,13 +30,13 @@ function App() {
       if (dx !== 0 || dy !== 0) {
         const nx = x + dx;
         const ny = y + dy;
-        console.log(`Trying to move to: (${nx}, ${ny})`); // 디버깅용 로그
+        // console.log(`Trying to move to: (${nx}, ${ny})`); // 디버깅용 로그
         
         if (isWalkable(dummyMap, logicGrid, nx, ny)) {
-          console.log(`Move successful to: (${nx}, ${ny})`); // 디버깅용 로그
+          // console.log(`Move successful to: (${nx}, ${ny})`); // 디버깅용 로그
           move(dx, dy);
         } else {
-          console.log(`Move blocked to: (${nx}, ${ny})`); // 디버깅용 로그
+          // console.log(`Move blocked to: (${nx}, ${ny})`); // 디버깅용 로그
         }
       }
     };
@@ -45,11 +45,11 @@ function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [x, y, move]);
 
-  console.log('App render:', { player: `(${x}, ${y})`, camera: `(${cameraX}, ${cameraY})` }); // 디버깅용 로그
+  // console.log('App render:', { player: `(${x}, ${y})`, camera: `(${cameraX}, ${cameraY})` }); // 디버깅용 로그
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-900">
-      <h1 className="text-2xl font-bold text-white mb-4">TileMap Demo (MDN 기반)</h1>
+      {/* <h1 className="text-2xl font-bold text-white mb-4">TileMap Demo (MDN 기반)</h1> */}
       <TileMap
         map={dummyMap}
         logicGrid={logicGrid}
@@ -61,14 +61,14 @@ function App() {
         viewportW={VIEWPORT_W}
         viewportH={VIEWPORT_H}
       />
-      <div className="mt-4 text-white text-sm">
+      {/* <div className="mt-4 text-white text-sm">
         <div>플레이어 위치: ({x}, {y})</div>
         <div>카메라 좌상단: ({cameraX}, {cameraY})</div>
         <div>WASD/방향키로 이동 (벽/물/나무는 통과 불가)</div>
         <div className="text-xs text-gray-400 mt-2">
           브라우저 콘솔(F12)에서 디버깅 로그 확인 가능
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

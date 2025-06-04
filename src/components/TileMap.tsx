@@ -20,13 +20,13 @@ export const TileMap: React.FC<TileMapProps> = ({
   const tiles: JSX.Element[] = [];
 
   // 디버깅용 로그
-  console.log('TileMap render:', { 
-    mapSize: `${map.width}x${map.height}`, 
-    viewport: `${viewportW}x${viewportH}`,
-    camera: `(${cameraX}, ${cameraY})`,
-    player: `(${playerX}, ${playerY})`,
-    tilesLength: map.tiles.length
-  });
+  // console.log('TileMap render:', { 
+  //   mapSize: `${map.width}x${map.height}`, 
+  //   viewport: `${viewportW}x${viewportH}`,
+  //   camera: `(${cameraX}, ${cameraY})`,
+  //   player: `(${playerX}, ${playerY})`,
+  //   tilesLength: map.tiles.length
+  // });
 
   for (let row = 0; row < viewportH; row++) {
     for (let col = 0; col < viewportW; col++) {

@@ -9,8 +9,8 @@ export const tileAtlas: TileAtlas = [
   { name: 'tree', color: '#166534', icon: '🌳', walkable: false },
 ];
 
-const WIDTH = 20;
-const HEIGHT = 20;
+const WIDTH = 30;
+const HEIGHT = 30;
 const TILE_SIZE = 32;
 
 // 패턴이 있는 맵 생성 (디버깅용)
